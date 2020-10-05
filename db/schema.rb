@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_07_145218) do
+ActiveRecord::Schema.define(version: 2020_10_05_112708) do
 
   create_table "books", force: :cascade do |t|
     t.string "title"
@@ -18,6 +18,23 @@ ActiveRecord::Schema.define(version: 2020_08_07_145218) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "hashbody"
+  end
+
+  create_table "hashtag_books", force: :cascade do |t|
+    t.integer "book_id"
+    t.integer "hashtag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_hashtag_books_on_book_id"
+    t.index ["hashtag_id"], name: "index_hashtag_books_on_hashtag_id"
+  end
+
+  create_table "hashtags", force: :cascade do |t|
+    t.string "hashname"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hashname"], name: "index_hashtags_on_hashname", unique: true
   end
 
   create_table "users", force: :cascade do |t|
